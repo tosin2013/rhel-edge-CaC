@@ -1,5 +1,8 @@
 # Getting Started
 
+## Requirements
+* Tested on OpenShift 4.12
+
 ## Installation
 
 1. Start by installing the OpenShift GitOps Operator:
@@ -30,6 +33,7 @@ Change the following two fields in the gitlab values.yaml file:
 Next, deploy gitlab with the following command:
 
 ```
+vim deploy/lab-content/gitlab/values.yaml
 helm template deploy/lab-content/gitlab | oc apply -f -
 ```
 
