@@ -2,13 +2,19 @@
 
 ## Requirements
 * Tested on OpenShift 4.12
+* HELM 
+```
+$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+$ chmod 700 get_helm.sh
+$ ./get_helm.sh
+```
 
 ## Installation
 
 1. Start by installing the OpenShift GitOps Operator:
 
 ``` 
-oc apply -f deploy/bootstrap/operators/openshift-gitops.yaml
+oc apply -k deploy/bootstrap/operators/
 oc label ns/openshift-authentication argocd.argoproj.io/managed-by=openshift-gitops
 oc label ns/openshift-config argocd.argoproj.io/managed-by=openshift-gitops
 ```
