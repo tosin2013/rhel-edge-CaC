@@ -24,3 +24,6 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+
+
+# https://github.com/Red-Hat-SE-RTO/ocp4-ai-svc-universal-aap-configs/blob/main/openshift/core/operator/base/install.yaml
