@@ -30,6 +30,10 @@ oc apply -f deploy/lab-content/apps/
   - OpenShift GitOps
   - Red Hat SSO
   - OpenShift Dev Spaces
+  - OpenShift Pipelines
+  - Quay Registry
+  - Ansible Automation Controller
+  - Ansible Automation Hub
 
 4. Update the 'values.yaml' file and deploy GitLab
 
