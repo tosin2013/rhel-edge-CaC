@@ -2,17 +2,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: aap-operator
+  name: aap-instance
   namespace: openshift-gitops
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   destination:
     namespace: ansible-automation-platform
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: deploy/lab-content/ansible-aap/operator/overlays/stable-2.3-cluster-scoped
+    path: deploy/lab-content/ansible-aap/instance/overlays/default
     repoURL: https://github.com/tosin2013/rhel-edge-CaC.git
     targetRevision: main
   syncPolicy:
