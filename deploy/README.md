@@ -50,6 +50,11 @@ helm template deploy/lab-content/gitlab | oc apply -f -
 
 Wait for GitLab to fully come up (need 5-10 minutes) before proceeding with the next step.
 
+## How to get password for labuser1
+```
+ cat ./deploy/lab-content/rhsso/users/lab1.yaml
+```
+
 
 ## Seeding Content and preparing the environment
 
