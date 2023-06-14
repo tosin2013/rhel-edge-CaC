@@ -7,7 +7,7 @@ on:
         required: false
         default: hostname
 jobs:
-  say_hello:
+  configure_ansible_navigator:
     runs-on: configure-ansible-navigator
     timeout-minutes: 45
     steps:
