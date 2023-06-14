@@ -1,5 +1,9 @@
 # RHEL Edge Configuration as CODE 
 
+## Pre  Requisites
+* fork repo to your github account
+* review [github_actions](github_actions) to enable pipelines
+
 ## Instructions 
 [Getting Started](https://github.com/tosin2013/rhel-edge-CaC/tree/main/deploy)
 ```

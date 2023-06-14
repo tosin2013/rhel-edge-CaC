@@ -28,8 +28,8 @@ function configure_python() {
         tar xvf openssl-1.1.1t.tar.gz
         cd openssl-1.1*/
         ./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl
-        make
-        make install
+        sudo make
+        sudo make install
 #        sudo ldconfig
 #        sudo tee /etc/profile.d/openssl.sh<<EOF
 #export PATH=/usr/local/openssl/bin:\$PATH
@@ -45,8 +45,8 @@ function configure_python() {
         cd Python-3.11.2
         mkdir -p  /usr/lib64/Python-3.11.2
         ./configure  --prefix=/usr/lib64/Python-3.11.2 --enable-loadable-sqlite-extensions --enable-optimizations
-        make
-         make altinstall
+        sudo make
+        sudo make altinstall
         ls -lath /usr/lib64/Python-3.11.2
         whereis python3
 
