@@ -74,8 +74,8 @@ function configure_python() {
         pip3 install ansible-vault
 
         /usr/lib64/Python-3.11.2/bin/ansible-navigator --version
-        cp /usr/lib64/Python-3.11.2/bin/ansible-navigator /usr/local/bin/ansible-navigator
-        cp /usr/lib64/Python-3.11.2/bin/ansible-vault /usr/bin/ansible-vault
+        sudo cp /usr/lib64/Python-3.11.2/bin/ansible-navigator /usr/local/bin/ansible-navigator
+        sudo cp /usr/lib64/Python-3.11.2/bin/ansible-vault /usr/bin/ansible-vault
         echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.profile
         source ~/.profile
     fi
