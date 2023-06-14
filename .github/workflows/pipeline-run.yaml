@@ -9,7 +9,7 @@ on:
       password:
         description: 'PASSWORD'
         required: false
-        default: P@s$w0Rd'
+        default: P@s$w0Rd
 
 jobs:
   say_hello:
@@ -17,4 +17,4 @@ jobs:
     steps:
     - run: |
         echo "Hello ${{ inputs.username }}"
-        echo "- in ${{ inputs.password }}"
+        echo "- in ::add-mask::${{ inputs.password }}"

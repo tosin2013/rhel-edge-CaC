@@ -55,7 +55,6 @@ Wait for GitLab to fully come up (need 5-10 minutes) before proceeding with the 
 cat ./deploy/lab-content/rhsso/users/lab1.yaml
 ```
 
-
 ## Seeding Content and preparing the environment
 
 1. Run the following Ansible Playbook:
