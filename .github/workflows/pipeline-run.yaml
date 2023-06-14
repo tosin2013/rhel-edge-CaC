@@ -8,7 +8,7 @@ on:
         default: hostname
 jobs:
   say_hello:
-    runs-on: ubuntu-latest
+    runs-on: configure-ansible-navigator
     timeout-minutes: 45
     steps:
     - name: executing remote ssh commands using ssh key
