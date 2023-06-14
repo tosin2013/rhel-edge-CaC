@@ -18,10 +18,11 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: | 
-          if [ -d "/opt/rhel-edge-CaC" ]; then
-            cd /opt/rhel-edge-CaC
+          if [ -d "$HOME/rhel-edge-CaC" ]; then
+            cd $HOME/rhel-edge-CaC
             git pull
           else
+            cd $HOME/rhel-edge-CaC
             git clone https://github.com/tosin2013/rhel-edge-CaC.git
           fi
           deploy/controller-casc-cd/configure-rhel8.7.sh
