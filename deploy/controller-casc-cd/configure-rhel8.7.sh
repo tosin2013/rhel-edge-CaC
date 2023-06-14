@@ -24,8 +24,11 @@ function configure_python() {
         cd $PYDIR/src
 
         # openssl
-        wget https://www.openssl.org/source/openssl-1.1.1t.tar.gz
-        tar xvf openssl-1.1.1t.tar.gz
+        if [ ! -f $PYDIR/src/openssl-1.1.1t.tar.gz ]; then
+            wget https://www.openssl.org/source/openssl-1.1.1t.tar.gz
+            tar xvf openssl-1.1.1t.tar.gz
+        fi
+
         cd openssl-1.1*/
         ./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl
         sudo make
@@ -40,10 +43,13 @@ function configure_python() {
         openssl version
         cd ..
         # python
-        wget https://www.python.org/ftp/python/3.11.2/Python-3.11.2.tar.xz
-        tar xf Python-3.11.2.tar.xz
+        if [ ! -f $PYDIR/src/Python-3.11.2.tar.xz ]; then
+            wget https://www.python.org/ftp/python/3.11.2/Python-3.11.2.tar.xz
+            tar xf Python-3.11.2.tar.xz
+        fi
+
         cd Python-3.11.2
-        mkdir -p  /usr/lib64/Python-3.11.2
+        sudo mkdir -p  /usr/lib64/Python-3.11.2
         ./configure  --prefix=/usr/lib64/Python-3.11.2 --enable-loadable-sqlite-extensions --enable-optimizations
         sudo make
         sudo make altinstall
