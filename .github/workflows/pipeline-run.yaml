@@ -17,4 +17,11 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
-        script: deploy/controller-casc-cd/configure-rhel8.7.sh
+        script: | 
+          if [ -d "/opt/rhel-edge-CaC" ]; then
+            cd /opt/rhel-edge-CaC
+            git pull
+          else
+            git clone https://github.com/tosin2013/rhel-edge-CaC.git
+          fi
+          deploy/controller-casc-cd/configure-rhel8.7.sh
