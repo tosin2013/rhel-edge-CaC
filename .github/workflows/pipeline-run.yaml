@@ -5,16 +5,15 @@ on:
       username:
         description: 'USERNAME'
         required: true
-        default: 'Mona the Octocat'
-      password:
-        description: 'PASSWORD'
+        default: 'admin'
+      hostname:
+        description: 'hostname'
         required: false
-        default: P@s$w0Rd
-
+        default: hostname
 jobs:
   say_hello:
     runs-on: ubuntu-latest
     steps:
     - run: |
         echo "Hello ${{ inputs.username }}"
-        echo "- in ::add-mask::${{ inputs.password }}"
+        echo "- in ::add-mask::${{ inputs.hostname }}"
