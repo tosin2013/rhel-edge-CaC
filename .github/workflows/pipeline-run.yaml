@@ -2,10 +2,6 @@ name: Manually triggered workflow
 on:
   workflow_dispatch:
     inputs:
-      username:
-        description: 'USERNAME'
-        required: true
-        default: 'admin'
       hostname:
         description: 'hostname'
         required: false
@@ -17,8 +13,8 @@ jobs:
     - name: executing remote ssh commands using ssh key
       uses: appleboy/ssh-action@v0.1.10
       with:
-        host: ::add-mask::${{ inputs.hostname }}
-        username: ${{ inputs.username }}
+        host: ${{ inputs.hostname }}
+        username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: whoami
