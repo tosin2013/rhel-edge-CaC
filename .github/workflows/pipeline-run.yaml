@@ -16,4 +16,4 @@ jobs:
     steps:
     - run: |
         echo "Hello ${{ inputs.username }}"
-        echo "- in ::add-mask::${{ inputs.hostname }}"
+        echo "::add-mask::${{ inputs.hostname }}"
