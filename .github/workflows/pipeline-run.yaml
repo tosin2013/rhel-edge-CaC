@@ -2,19 +2,19 @@ name: Manually triggered workflow
 on:
   workflow_dispatch:
     inputs:
-      name:
-        description: 'Person to greet'
+      username:
+        description: 'USERNAME'
         required: true
         default: 'Mona the Octocat'
-      home:
-        description: 'location'
+      password:
+        description: 'PASSWORD'
         required: false
-        default: 'The Octoverse'
+        default: P@s$w0Rd'
 
 jobs:
   say_hello:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo "Hello $!"
-        echo "- in $!"
+        echo "Hello ${{ inputs.username }}"
+        echo "- in ${{ inputs.password }}"
