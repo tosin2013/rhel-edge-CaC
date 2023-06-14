@@ -14,9 +14,6 @@ jobs:
   say_hello:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo "Hello ${{ inputs.username }}"
-        echo "::add-mask::${{ inputs.hostname }}"
     - name: executing remote ssh commands using ssh key
       uses: appleboy/ssh-action@v0.1.10
       with:
