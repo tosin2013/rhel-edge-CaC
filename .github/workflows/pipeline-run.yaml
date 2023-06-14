@@ -21,6 +21,7 @@ jobs:
         script: | 
           if [ -d "$HOME/rhel-edge-CaC" ]; then
             cd $HOME/rhel-edge-CaC
+            git config pull.rebase false
             git pull
           else
             cd $HOME/rhel-edge-CaC
