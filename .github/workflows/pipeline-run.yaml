@@ -17,3 +17,11 @@ jobs:
     - run: |
         echo "Hello ${{ inputs.username }}"
         echo "::add-mask::${{ inputs.hostname }}"
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ inputs.hostname }}
+        username: ::add-mask::${{ inputs.hostname }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: whoami
