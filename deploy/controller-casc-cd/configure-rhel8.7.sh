@@ -13,7 +13,7 @@ function configure_python() {
     echo "Configuring Python"
     echo "******************"
     if which python3.11  >/dev/null; then
-        echo "Python is installed"
+        echo "Python 3.11 is installed"
         exit 0 
     else
         PYDIR=$HOME/opt/

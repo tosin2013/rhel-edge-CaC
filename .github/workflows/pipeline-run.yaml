@@ -24,7 +24,7 @@ jobs:
             git config pull.rebase false
             git pull
           else
-            cd $HOME/rhel-edge-CaC
             git clone https://github.com/tosin2013/rhel-edge-CaC.git
+            cd $HOME/rhel-edge-CaC
           fi
           deploy/controller-casc-cd/configure-rhel8.7.sh
