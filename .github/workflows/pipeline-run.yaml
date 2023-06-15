@@ -28,3 +28,5 @@ jobs:
             cd $HOME/rhel-edge-CaC
           fi
           deploy/controller-casc-cd/configure-rhel8.7.sh
+      timeout-minutes: 30
+
