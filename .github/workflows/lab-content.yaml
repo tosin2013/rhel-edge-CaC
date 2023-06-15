@@ -1,0 +1,30 @@
+name: Configure Lab Content
+on:
+  workflow_dispatch:
+    inputs:
+      hostname:
+        description: 'hostname'
+        required: false
+        default: hostname
+jobs:
+  say_hello:
+    runs-on: deploy-lab
+    timeout-minutes: 45
+    steps:
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ inputs.hostname }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: | 
+          if [ -d "$HOME/rhel-edge-CaC" ]; then
+            cd $HOME/rhel-edge-CaC
+            git pull
+          else
+            git clone https://github.com/tosin2013/rhel-edge-CaC.git
+            cd $HOME/rhel-edge-CaC
+          fi
+          ./configure-lab-env.sh 
+      timeout-minutes: 30
