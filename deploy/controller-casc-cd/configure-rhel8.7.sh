@@ -14,7 +14,7 @@ function configure_python() {
     echo "******************"
     if which python3.11  >/dev/null; then
         echo "Python is installed"
-        source ~/.profile
+        exit 0 
     else
         PYDIR=$HOME/opt/
         export PATH=$PYDIR/bin:$PATH
