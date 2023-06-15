@@ -21,6 +21,10 @@ github_actions/copy-keys.sh   <username@host.com> <your_email@example.com>
 ![20230614141724](https://i.imgur.com/3J3K8JH.png)
 
 
+## Configure OpenShift GitHub Actions Runner Chart
+*Use this link for self hosted runners.*
+* https://github.com/redhat-actions/openshift-actions-runner-chart
+
 WIP - https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun
 ```
 curl \
