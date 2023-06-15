@@ -71,7 +71,7 @@ function configure_python() {
         sudo pip3 install ansible-navigator
         sudo pip3 install firewall
         sudo pip3 install pyyaml
-        pip3 install ansible-vault
+        sudo pip3 install ansible-vault
 
         /usr/lib64/Python-3.11.2/bin/ansible-navigator --version
         sudo cp /usr/lib64/Python-3.11.2/bin/ansible-navigator /usr/local/bin/ansible-navigator
