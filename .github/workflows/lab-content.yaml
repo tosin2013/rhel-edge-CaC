@@ -8,7 +8,7 @@ on:
         default: hostname
         
 jobs:
-  say_hello:
+  configure_lab_content:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
