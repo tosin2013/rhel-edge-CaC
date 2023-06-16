@@ -77,6 +77,7 @@ function configure_python() {
         /usr/lib64/Python-3.11.2/bin/ansible-navigator --version
         sudo cp /usr/lib64/Python-3.11.2/bin/ansible-navigator /usr/local/bin/ansible-navigator
         sudo cp /usr/lib64/Python-3.11.2/bin/ansible-vault /usr/bin/ansible-vault
+        ansible-galaxy collection install redhat_cop.controller_configuration
         echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.profile
         source ~/.profile
     fi

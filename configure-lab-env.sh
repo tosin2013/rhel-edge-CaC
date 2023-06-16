@@ -21,7 +21,7 @@ function dependency_check() {
         sudo chmod +x /usr/bin/yq
     fi
 
-    if ! helm -v  &> /dev/null
+    if ! helm -h  &> /dev/null
     then
         echo "installing helm"
         curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
@@ -81,7 +81,12 @@ echo "$SUBDOMAIN"
 yq e -i  '.gitlab.route = "'gitlab.$SUBDOMAIN'"' deploy/lab-content/gitlab/values.yaml
 yq e -i '.gitlab.sso.host = "'https://$KEYCLAK_URL'"' deploy/lab-content/gitlab/values.yaml
 
-helm template deploy/lab-content/gitlab | oc apply -f -
-sleep 30s
-GITLAB_POD=$(oc get pods -n gitlab-ce  | grep gitlab-ce- | awk '{print $1}')
-wait_for_pod $GITLAB_POD gitlab-ce
+CHECK_IF_RUNNING=$(oc get pods -n gitlab-ce | grep -E "^gitlab-ce-[0-9]-[a-zA-Z0-9]+" | grep -v  deploy| awk '{print $3}')
+if [[ "$CHECK_IF_RUNNING" = "Running" ]]; then
+  echo "Gitlab is already running"
+else
+  helm template deploy/lab-content/gitlab | oc apply -f -
+  sleep 30s
+  GITLAB_POD=$(oc get pods -n gitlab-ce  | grep gitlab-ce- | awk '{print $1}')
+  wait_for_pod $GITLAB_POD gitlab-ce
+fi

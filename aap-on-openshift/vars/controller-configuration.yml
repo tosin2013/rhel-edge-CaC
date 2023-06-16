@@ -90,7 +90,7 @@ controller_credentials:
     organization: Default
     credential_type: Openshift Kubeconfig
     inputs:
-      kubeconfig: "{{ lookup('file', (tmpdir.path + '/ocp/auth/kubeconfig')) | from_yaml | string }}"
+      kubeconfig: "{{ lookup('file', ('/home/lab-user/testing/kubeconfig')) | from_yaml | string }}"
   - name: Machine Credentials
     organization: Default
     credential_type: Machine
@@ -121,8 +121,8 @@ controller_credentials:
     credential_type: Kubeadmin Credentials
     organization: Default
     inputs:
-      kubeadmin_username: kubeadmin
-      kubeadmin_password: "{{ lookup('file', (tmpdir.path + '/ocp/auth/kubeadmin-password')) }}"
+      kubeadmin_username: "{{ lookup('file', ('../kubeadmin-username)) }}"
+      kubeadmin_password: "{{ lookup('file', ('../kubeadmin-password)) }}"
 controller_execution_environments:
   - name: Image Builder Execution Environment
     image: quay.io/device-edge-workshops/helper-ee:latest
