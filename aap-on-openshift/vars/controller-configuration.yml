@@ -121,8 +121,8 @@ controller_credentials:
     credential_type: Kubeadmin Credentials
     organization: Default
     inputs:
-      kubeadmin_username: "{{ lookup('file', ('../kubeadmin-username)) }}"
-      kubeadmin_password: "{{ lookup('file', ('../kubeadmin-password)) }}"
+      kubeadmin_username: "{{ kubeadmin_username }}"
+      kubeadmin_password: "{{ kubeadmin_password }}"
 controller_execution_environments:
   - name: Image Builder Execution Environment
     image: quay.io/device-edge-workshops/helper-ee:latest
