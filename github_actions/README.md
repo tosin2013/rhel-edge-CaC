@@ -18,12 +18,14 @@ github_actions/copy-keys.sh   <username@host.com> <your_email@example.com>
 ![20230614141452](https://i.imgur.com/9ytWG7K.png)
 ![20230614141541](https://i.imgur.com/EEsIl24.png)
 ![20230614174300](https://i.imgur.com/CHuySnG.png)
-![20230614141724](https://i.imgur.com/3J3K8JH.png)
-
+![20230616085832](https://i.imgur.com/CNPJ6jg.png)
+![20230616085859](https://i.imgur.com/XCdJmCY.png)
 
 ## Configure OpenShift GitHub Actions Runner Chart
 *Use this link for self hosted runners.*
 * https://github.com/redhat-actions/openshift-actions-runner-chart
+![20230615102322](https://i.imgur.com/ekHfjL1.png)
+
 
 WIP - https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun
 ```
@@ -34,3 +36,5 @@ curl \
     https://api.github.com/repos/tosin2013/rhel-edge-CaC/actions/workflows/pipeline-run/dispatches \
     -d '{"ref":"main", "inputs": { "name":"Command Line User", "home":"CLI" }}'
 ```
+
+
