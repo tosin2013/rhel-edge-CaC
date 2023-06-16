@@ -12,7 +12,7 @@ jobs:
     runs-on: deploy-lab
     timeout-minutes: 45
     steps:
-    - name: executing remote ssh commands using ssh key
+    - name: configure lab content
       uses: appleboy/ssh-action@v0.1.10
       with:
         host: ${{ inputs.hostname }}
