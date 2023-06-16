@@ -1,0 +1,39 @@
+---
+
+- name: configure ansible controller
+  hosts:
+    - localhost
+  connection: local
+  gather_facts: false
+  pre_tasks:
+    - name: get route to controller
+      ansible.builtin.shell:
+        cmd: oc get route -n ansible-automation-platform | grep controller | awk '{print $2}'
+      environment:
+        KUBECONFIG: "/home/lab-user/testing/kubeconfig"
+      register: _controller_route
+    - name: show route to controller
+      ansible.builtin.debug:
+        msg: "{{ _controller_route.stdout }}"
+    - name: get controller admin password
+      ansible.builtin.shell:
+        cmd: oc get secret controller-admin-password -n ansible-automation-platform -o jsonpath="{.data['password']}"  | base64 --decode
+      environment:
+        KUBECONFIG: "/home/lab-user/testing/kubeconfig"
+      register: _controller_password
+      no_log: true
+    - name: set controller facts
+      ansible.builtin.set_fact:
+        controller_hostname: "{{ _controller_route.stdout }}"
+        controller_password: "{{ _controller_password.stdout }}"
+    - name: load in vars file
+      ansible.builtin.include_vars:
+        file: vars/controller-configuration.yml
+  roles:
+    - redhat_cop.controller_configuration.credential_types
+    - redhat_cop.controller_configuration.credentials
+    - redhat_cop.controller_configuration.execution_environments
+    - redhat_cop.controller_configuration.inventories
+    - redhat_cop.controller_configuration.hosts
+    - redhat_cop.controller_configuration.projects
+    - redhat_cop.controller_configuration.job_templates

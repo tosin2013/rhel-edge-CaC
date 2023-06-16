@@ -1,7 +1,14 @@
 #!/bin/bash 
 
-function waitforme() {
-  while [[ $(oc get pods $1 -n $2 -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for pod: $1" && sleep 5; done
+
+function wait_for_pod() {
+  local pod_name=$1
+  local namespace=$2
+
+  while [[ $(oc get pods "$pod_name" -n "$namespace" -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
+    echo "Waiting for pod: $pod_name"
+    sleep 5
+  done
 }
 
 
@@ -14,7 +21,7 @@ function dependency_check() {
         sudo chmod +x /usr/bin/yq
     fi
 
-    if ! yq -v  &> /dev/null
+    if ! helm -v  &> /dev/null
     then
         echo "installing helm"
         curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
@@ -24,25 +31,30 @@ function dependency_check() {
 
 }
 
+dependency_check
 
-
-oc apply -k deploy/bootstrap/operators/
-oc label ns/openshift-authentication argocd.argoproj.io/managed-by=openshift-gitops
-oc label ns/openshift-config argocd.argoproj.io/managed-by=openshift-gitops
+CHECK_IF_RUNNING=$(oc get pods -n openshift-gitops | grep openshift-gitops-server- | awk '{print $3}')
+if [[ "$CHECK_IF_RUNNING" = "Running" ]]; then
+  echo "OpenShift GitOps is already running"
+else
+  oc apply -k deploy/bootstrap/operators/
+  oc label ns/openshift-authentication argocd.argoproj.io/managed-by=openshift-gitops
+  oc label ns/openshift-config argocd.argoproj.io/managed-by=openshift-gitops
+fi 
 
 # Get the current phase of the CSV
-phase=$(oc get csv -n openshift-gitops | grep Succeeded | awk '{print $8}')
+phase=$(oc get csv -n openshift-gitops  | grep openshift-gitops-operator | grep Succeeded | awk '{print $8}')
 
 # While the phase is not Succeeded, sleep for 10 seconds and then get the phase again
 while [[ $phase != "Succeeded" ]]; do
   sleep 10
-  phase=$(oc get csv -n openshift-gitops | grep Succeeded | awk '{print $8}')
+  phase=$(oc get csv -n openshift-gitops  | grep openshift-gitops-operator  | grep Succeeded | awk '{print $8}')
 done
 
 # Print a message when the phase is Succeeded
-echo "CSV succeeded!"
+echo "openshift-gitops-operator CSV succeeded!"
 GITOPS_POD=$(oc get pods -n openshift-gitops | grep openshift-gitops-server- | awk '{print $1}')
-waitforme $GITOPS_POD openshift-gitops 
+wait_for_pod $GITOPS_POD openshift-gitops 
 
 oc apply -f deploy/lab-content/apps/
 
@@ -55,11 +67,11 @@ while [[ $phase != "Succeeded" ]]; do
 done
 
 # Print a message when the phase is Succeeded
-echo "CSV succeeded!"
+echo "rhsso-operator CSV succeeded!"
 
 sleep 30s
 SSO_POD=$(oc get pods -n devspaces-lab-sso  | grep keycloak-0 | awk '{print $1}')
-waitforme $SSO_POD devspaces-lab-sso 
+wait_for_pod $SSO_POD devspaces-lab-sso 
 
 KEYCLAK_URL=$(oc get routes -n devspaces-lab-sso | grep keycloak-devspaces-lab-sso | head -1 | awk '{print $2}')
 # Extracting the desired subdomain using regular expressions and "grep"
@@ -70,3 +82,6 @@ yq e -i  '.gitlab.route = "'gitlab.$SUBDOMAIN'"' deploy/lab-content/gitlab/value
 yq e -i '.gitlab.sso.host = "'https://$KEYCLAK_URL'"' deploy/lab-content/gitlab/values.yaml
 
 helm template deploy/lab-content/gitlab | oc apply -f -
+sleep 30s
+GITLAB_POD=$(oc get pods -n gitlab-ce  | grep gitlab-ce- | awk '{print $1}')
+wait_for_pod $GITLAB_POD gitlab-ce
