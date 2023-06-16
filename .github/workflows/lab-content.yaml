@@ -9,7 +9,7 @@ on:
         
 jobs:
   say_hello:
-    runs-on: deploy-lab
+    runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
     - name: configure lab content
