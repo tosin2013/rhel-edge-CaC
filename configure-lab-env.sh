@@ -57,6 +57,7 @@ done
 # Print a message when the phase is Succeeded
 echo "CSV succeeded!"
 
+sleep 30s
 SSO_POD=$(oc get pods -n devspaces-lab-sso  | grep keycloak-0 | awk '{print $1}')
 waitforme $SSO_POD devspaces-lab-sso 
 
@@ -65,5 +66,7 @@ KEYCLAK_URL=$(oc get routes -n devspaces-lab-sso | grep keycloak-devspaces-lab-s
 SUBDOMAIN=$(echo "$KEYCLAK_URL" | grep -oP '(?<=keycloak-devspaces-lab-sso\.)(.*)')
 
 echo "$SUBDOMAIN"
-yq e  '.gitlab.route = "'gitlab.$SUBDOMAIN'"' deploy/lab-content/gitlab/values.yaml
-yq e  '.gitlab.sso.host = "'https://$KEYCLAK_URL'"' deploy/lab-content/gitlab/values.yaml
+yq e -i  '.gitlab.route = "'gitlab.$SUBDOMAIN'"' deploy/lab-content/gitlab/values.yaml
+yq e -i '.gitlab.sso.host = "'https://$KEYCLAK_URL'"' deploy/lab-content/gitlab/values.yaml
+
+helm template deploy/lab-content/gitlab | oc apply -f -
