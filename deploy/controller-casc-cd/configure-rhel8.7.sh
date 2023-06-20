@@ -6,7 +6,7 @@ set -xe
 #fi
 cat /etc/redhat-release 
 # Red Hat Enterprise Linux release 8.7 (Ootpa)
-sudo yum -y install bzip2-devel libffi-devel openssl-devel make zlib-devel perl ncurses-devel sqlite sqlite-devel python3 python3-devel git
+sudo yum -y install bzip2-devel libffi-devel openssl-devel make zlib-devel perl ncurses-devel sqlite sqlite-devel python3 python3-devel git wget
 sudo yum groupinstall "Development Tools" -y
 openssl version
 function configure_python() {
@@ -70,18 +70,20 @@ function configure_python() {
         sudo pip3 install setuptools-rust
         sudo pip3 install --user ansible-core
         sudo pip3 install --upgrade --user ansible
+        curl -Ol https://raw.githubusercontent.com/ansible/ansible-navigator/main/requirements.txt
+        sudo pip3 install -r requirements.txt
         sudo pip3 install ansible-navigator
         sudo pip3 install firewall
         sudo pip3 install pyyaml
-        sudo pip3 install jinja2
+        sudo pip install Jinja2
         sudo pip3 install ansible-vault
-
+        echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.profile
+        source ~/.profile
         /usr/lib64/Python-3.11.2/bin/ansible-navigator --version
         sudo cp /usr/lib64/Python-3.11.2/bin/ansible-navigator /usr/local/bin/ansible-navigator
         sudo cp /usr/lib64/Python-3.11.2/bin/ansible-vault /usr/bin/ansible-vault
         ansible-galaxy collection install redhat_cop.controller_configuration
-        echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.profile
-        source ~/.profile
+       
     fi
     
 }
