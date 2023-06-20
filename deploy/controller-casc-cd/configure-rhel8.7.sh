@@ -72,7 +72,7 @@ function configure_python() {
         sudo pip3 install ansible-navigator
         sudo pip3 install firewall
         sudo pip3 install pyyaml
-        sudo pip install Jinja2
+        sudo pip3 install Jinja2
         sudo pip3 install ansible-vault
         echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.profile
         source ~/.profile
