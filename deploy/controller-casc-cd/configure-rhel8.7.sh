@@ -4,10 +4,7 @@ set -xe
 #    echo "This script must be run as root"
 #    exit 1
 #fi
-cat /etc/redhat-release 
-# Red Hat Enterprise Linux release 8.7 (Ootpa)
-sudo yum -y install bzip2-devel libffi-devel openssl-devel make zlib-devel perl ncurses-devel sqlite sqlite-devel python3 python3-devel git wget curl 
-sudo yum groupinstall "Development Tools" -y
+
 openssl version
 function configure_python() {
     echo "Configuring Python"
@@ -88,4 +85,8 @@ function configure_python() {
     
 }
 
+cat /etc/redhat-release 
+# Red Hat Enterprise Linux release 8.7 (Ootpa)
+sudo yum -y install bzip2-devel libffi-devel openssl-devel make zlib-devel perl ncurses-devel sqlite sqlite-devel python3 python3-devel git wget curl 
+sudo yum groupinstall "Development Tools" -y
 configure_python
