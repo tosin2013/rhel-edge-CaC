@@ -48,23 +48,25 @@ function configure_python() {
             tar xf Python-3.11.2.tar.xz
         fi
 
-        cd Python-3.11.2
-        sudo mkdir -p  /usr/lib64/Python-3.11.2
-        ./configure  --prefix=/usr/lib64/Python-3.11.2 --enable-loadable-sqlite-extensions --enable-optimizations
-        sudo make
-        sudo make altinstall
-        ls -lath /usr/lib64/Python-3.11.2
-        whereis python3
+        if [ ! -f  /usr/local/bin/python3.11 ];
+        then 
+            cd Python-3.11.2
+            sudo mkdir -p  /usr/lib64/Python-3.11.2
+            ./configure  --prefix=/usr/lib64/Python-3.11.2 --enable-loadable-sqlite-extensions --enable-optimizations
+            sudo make
+            sudo make altinstall
+            ls -lath /usr/lib64/Python-3.11.2
+            whereis python3
 
-        sudo rm -rf /usr/bin/python3
-        sudo cp /usr/lib64/Python-3.11.2/bin/python3.11 /usr/local/bin/python3.11
-        sudo cp /usr/lib64/Python-3.11.2/bin/python3.11 /usr/bin/python3.11
-        sudo ln /usr/local/bin/python3.11 /usr/local/bin/python3
-        sudo ln /usr/local/bin/python3.11 /usr/bin/python3
-        sudo cp /usr/lib64/Python-3.11.2/bin/pip3.11 /usr/local/bin/pip3.11
-        sudo rm -rf /usr/bin/pip3
-        sudo ln /usr/lib64/Python-3.11.2/bin/pip3.11 /usr/bin/pip3
-        
+            sudo rm -rf /usr/bin/python3
+            sudo cp /usr/lib64/Python-3.11.2/bin/python3.11 /usr/local/bin/python3.11
+            sudo cp /usr/lib64/Python-3.11.2/bin/python3.11 /usr/bin/python3.11
+            sudo ln /usr/local/bin/python3.11 /usr/local/bin/python3
+            sudo ln /usr/local/bin/python3.11 /usr/bin/python3
+            sudo cp /usr/lib64/Python-3.11.2/bin/pip3.11 /usr/local/bin/pip3.11
+            sudo rm -rf /usr/bin/pip3
+            sudo ln /usr/lib64/Python-3.11.2/bin/pip3.11 /usr/bin/pip3
+        fi 
         sudo pip3 install setuptools-rust
         sudo pip3 install --user ansible-core
         sudo pip3 install --upgrade --user ansible

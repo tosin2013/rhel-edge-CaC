@@ -7,8 +7,8 @@ if [ ! -d $HOME/controller-casc-cd ]; then
   exit 1
 fi 
 
-export CONTROLLER_DEV_HOST=https://controller-ansible-automation-platform.apps.cluster-kz6tk.example.com/
-export CONTROLLER_PRO_HOST=https://controller-ansible-automation-platform.apps.cluster-kz6tk..example.com/
+export CONTROLLER_DEV_HOST=https://controller-ansible-automation-platform.apps.cluster-ss575.ss575.sandbox3178.opentlc.com/
+export CONTROLLER_PRO_HOST=https://controller-ansible-automation-platform.apps.cluster-ss575.ss575.sandbox3178.opentlc.com/
 
 cd $HOME/controller-casc-cd 
 
