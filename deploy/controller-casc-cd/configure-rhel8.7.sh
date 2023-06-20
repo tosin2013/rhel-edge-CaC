@@ -64,16 +64,16 @@ function configure_python() {
             sudo rm -rf /usr/bin/pip3
             sudo ln /usr/lib64/Python-3.11.2/bin/pip3.11 /usr/bin/pip3
         fi 
-        sudo pip3 install setuptools-rust
-        sudo pip3 install --user ansible-core
-        sudo pip3 install --upgrade --user ansible
+        sudo pip3 install setuptools-rust && pip3 install setuptools-rust
+        sudo pip3 install --user ansible-core && pip3 install --user ansible-core
+        sudo pip3 install --upgrade --user ansible && pip3 install --upgrade --user ansible
         curl -Ol https://raw.githubusercontent.com/ansible/ansible-navigator/main/requirements.txt
-        sudo pip3 install -r requirements.txt
-        sudo pip3 install ansible-navigator
-        sudo pip3 install firewall
-        sudo pip3 install pyyaml
-        sudo pip3 install Jinja2
-        sudo pip3 install ansible-vault
+        sudo pip3 install -r requirements.txt && pip3 install -r requirements.txt
+        sudo pip3 install ansible-navigator && pip3 install ansible-navigator
+        sudo pip3 install firewall &&  pip3 install firewall
+        sudo pip3 install pyyaml &&  pip3 install pyyaml
+        sudo pip3 install Jinja2 &&  pip3 install Jinja2
+        sudo pip3 install ansible-vault &&  pip3 install ansible-vault
         echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.profile
         source ~/.profile
         /usr/lib64/Python-3.11.2/bin/ansible-navigator --version
