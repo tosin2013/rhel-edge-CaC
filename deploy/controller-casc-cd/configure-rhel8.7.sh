@@ -83,7 +83,7 @@ function configure_python() {
         sudo cp /usr/lib64/Python-3.11.2/bin/ansible-navigator /usr/local/bin/ansible-navigator
         sudo cp /usr/lib64/Python-3.11.2/bin/ansible-vault /usr/bin/ansible-vault
         ansible-galaxy collection install redhat_cop.controller_configuration
-       
+
     fi
     
 }
