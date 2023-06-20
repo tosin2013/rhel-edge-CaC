@@ -12,8 +12,8 @@ openssl version
 function configure_python() {
     echo "Configuring Python"
     echo "******************"
-    if which python3.11  >/dev/null; then
-        echo "Python 3.11 is installed"
+    if which /usr/local/bin/ansible-navigator  >/dev/null; then
+        echo "ansible-navigator is installed"
         exit 0 
     else
         PYDIR=$HOME/opt/

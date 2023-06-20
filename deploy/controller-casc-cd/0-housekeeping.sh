@@ -9,7 +9,7 @@ cd ${HOME}/controller-casc-cd
 git remote remove origin
 git config --global user.name "Lab One"
 git config --global user.email "lab1@example.com"
-git remote add origin https://gitlab.apps.cluster-kz6tk.example.com/lab1/controller-casc-cd.git
+git remote add origin https://gitlab.apps.cluster-ss575.ss575.sandbox3178.opentlc.com/lab1/controller-casc-cd.git
 
 cat > .gitignore <<EOF
 collections/ansible_collections
