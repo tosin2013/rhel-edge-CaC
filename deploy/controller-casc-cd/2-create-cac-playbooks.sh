@@ -11,7 +11,7 @@ cd $HOME/controller-casc-cd
 
 export SUPERADMIN_ORG=rhel-edge-cac
 # Project to get the CaC related playbooks
-export PROJECT_URL_CASC='https://gitlab.apps.cluster-kz6tk.example.com/lab1/controller-casc-cd.git'
+export PROJECT_URL_CASC='https://gitlab.apps.cluster-ss575.ss575.sandbox3178.opentlc.com/lab1/controller-casc-cd.git'
 
 read -e  -p "Enter the username for GitLab Credential: " GITLAB_USERNAME
 echo "Result is: $GITLAB_USERNAME"
