@@ -21,6 +21,7 @@ jobs:
         port: ${{ secrets.PORT }}
         command_timeout: 30m
         script: | 
+          sudo yum install -y git
           if [ -d "$HOME/rhel-edge-CaC" ]; then
             cd $HOME/rhel-edge-CaC
             git config pull.rebase false
